@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="care"/>
+    <Button
+        android:id="@+id/btn_saosao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sao_sao"
+        android:layout_centerInParent="true"
+        android:text="二维码制作与扫描"/>
+    <Button
+        android:id="@+id/log_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_saosao"
+        android:text="save"/>
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/log_save"
+        android:gravity="center"
+        android:text="dfjdlksjfkldsajfklsdjflksjl"/>
+    <Button
+        android:id="@+id/start_other_app_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv"
+        android:text="启动另一个app的后台(有通知)"/>
+    <Button
+        android:id="@+id/share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_other_app_service"
+        android:text="分享"/>
+
+</RelativeLayout>

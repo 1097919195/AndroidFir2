@@ -1,0 +1,1 @@
+include ':app', 'library:common', ':library:irecyclerview', ':library:zxingScan', ':library:jcvideoplayer', 'library:oneKeyShareSDK'
