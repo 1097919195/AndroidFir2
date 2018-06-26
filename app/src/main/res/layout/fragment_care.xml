@@ -41,5 +41,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/start_other_app_service"
         android:text="分享"/>
+    <Button
+        android:id="@+id/compression"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/share"
+        android:text="图片压缩"/>
 
 </RelativeLayout>

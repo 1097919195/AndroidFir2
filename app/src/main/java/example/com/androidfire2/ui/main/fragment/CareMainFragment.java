@@ -15,6 +15,7 @@ import java.io.IOException;
 import butterknife.Bind;
 import butterknife.OnClick;
 import example.com.androidfire2.R;
+import example.com.androidfire2.ui.main.activity.PicCompressionActivity;
 import example.com.androidfire2.ui.news.activty.SaoSaoActivityTest;
 
 
@@ -44,7 +45,7 @@ public class CareMainFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.btn_saosao,R.id.log_save,R.id.start_other_app_service,R.id.share})
+    @OnClick({R.id.btn_saosao,R.id.log_save,R.id.start_other_app_service,R.id.share,R.id.compression})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_saosao:
@@ -85,6 +86,12 @@ public class CareMainFragment extends BaseFragment {
             case R.id.share:
 //                OnekeyShare share = new OnekeyShare();
 //                share.show(getActivity());
+                break;
+            case R.id.compression:
+                Intent intent1 = new Intent(getActivity(), PicCompressionActivity.class);
+                startActivity(intent1);
+                break;
+            default:
                 break;
 
         }
