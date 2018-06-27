@@ -1,12 +1,16 @@
 package example.com.androidfire2.ui.main.activity;
 
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,13 +24,16 @@ import com.jaydenxiao.common.commonutils.ToastUitl;
 import com.jaydenxiao.common.compressorutils.Compressor;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import butterknife.Bind;
+import example.com.androidfire2.BuildConfig;
 import example.com.androidfire2.R;
 import example.com.androidfire2.utils.BitmapUtils;
 import uk.co.senab.photoview.PhotoView;
@@ -137,10 +144,19 @@ public class PicCompressionActivity extends BaseActivity {
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
 
         //todo 添加版本判断7.0  URL暴露的问题
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        imageUri = Uri.fromFile(outputImage);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            // 将文件转换成content://Uri的形式
+            imageUri = FileProvider.getUriForFile(this,
+                    BuildConfig.APPLICATION_ID + ".fileprovider", outputImage);
+            // 申请临时访问权限
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        }else {
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            imageUri = Uri.fromFile(outputImage);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        }
         startActivityForResult(intent, TAKE_PHOTO);
     }
 
@@ -168,6 +184,7 @@ public class PicCompressionActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+            ProgressDialog progressDialog;
             switch (requestCode) {
                 case COMPRESSION_CODE:
                     // 获取选中图片的路径
@@ -180,7 +197,22 @@ public class PicCompressionActivity extends BaseActivity {
                     }
                     cursor.close();
 
+                    progressDialog = new ProgressDialog(this);
+                    progressDialog.setMessage("正在扫描...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+
+                    //第一种
                     Glide.with(this).load(photoPath).into(compressionBefore);
+
+                    //第二种 自己写的（打开相册可以，下面拍照就不行，需要改进）
+//                    Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
+//                    if (bitmap != null) {
+//                        compressionBefore.setImageBitmap(bitmap);
+//                    }else {
+//                        ToastUitl.showShort("打开照片失败！");
+//                    }
+                    progressDialog.dismiss();
                     break;
 
                 case TAKE_PHOTO:
@@ -204,6 +236,20 @@ public class PicCompressionActivity extends BaseActivity {
 //                    } else {
 //                        ToastUitl.showShort("拍照失败！");
 //                    }
+
+                    //第三种 自己写的（根据bitmap获取,可能需要异步，不然获取不到，在相册中就可以） Android图片加载解析之Bitmap  https://www.jianshu.com/p/e00dce838fb2
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Bitmap bitmap1 = BitmapFactory.decodeFile(photoPath);
+//                            if (bitmap1 != null) {
+//                                compressionBefore.setImageBitmap(bitmap1);
+//                            }else {
+//                                ToastUitl.showShort("拍照失败！");
+//                            }
+//                        }
+//                    }).start();
+
                     break;
                 default:
                     break;

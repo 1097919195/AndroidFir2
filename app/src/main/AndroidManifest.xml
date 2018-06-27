@@ -17,6 +17,10 @@
 
     <uses-permission android:name="android.permission.FLASHLIGHT"/>//闪光灯
 
+    <!-- 添加操作联系人的权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
     <application
         android:name=".app.AppApplication"
         android:allowBackup="true"
@@ -42,11 +46,23 @@
         <activity android:name=".ui.news.activty.SaoSaoActivityTest" />
         <activity android:name=".ui.news.activty.PhotosDetailActivity" />
         <activity android:name=".ui.main.activity.PicCompressionActivity" />
+        <activity android:name=".ui.main.activity.ContactsProviderActivity" />
         <!-- 友盟统计 -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="57e8e398e0f55ae655000723" >
         </meta-data>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>

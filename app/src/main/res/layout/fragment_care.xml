@@ -13,8 +13,7 @@
         android:id="@+id/btn_saosao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/sao_sao"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
         android:text="二维码制作与扫描"/>
     <Button
         android:id="@+id/log_save"
@@ -47,5 +46,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/share"
         android:text="图片压缩"/>
+    <Button
+        android:id="@+id/contentProvider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/compression"
+        android:text="联系人操作"/>
 
 </RelativeLayout>
