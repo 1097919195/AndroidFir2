@@ -6,6 +6,22 @@
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/scanResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        />
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dip"
+        android:progressDrawable="@drawable/pg"
+        android:visibility="gone"
+
+        />
+
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
