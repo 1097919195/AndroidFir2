@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * 图像util
@@ -155,12 +156,13 @@ class ImageUtil {
         return new File(filename);
     }
 
+    //保证了压缩后的图片命名不重复可以多次解压同一张图片   "_" + (new Date()).getTime()
     private static String generateFilePath(Context context, String parentPath, Uri uri, String extension) {
         File file = new File(parentPath);
         if (!file.exists()) {
             file.mkdirs();
         }
-        return file.getAbsolutePath() + File.separator + FileUtil.splitFileName(FileUtil.getFileName(context, uri))[0] + "." + extension;
+        return file.getAbsolutePath() + File.separator + FileUtil.splitFileName(FileUtil.getFileName(context, uri))[0] + "_" + (new Date()).getTime() + "." + extension;
     }
 
     private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {

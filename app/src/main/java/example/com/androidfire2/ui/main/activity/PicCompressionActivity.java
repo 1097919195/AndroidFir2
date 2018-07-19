@@ -85,10 +85,15 @@ public class PicCompressionActivity extends BaseActivity {
                 if (!photoPath.isEmpty()) {
                     File before = new File(photoPath);
 
+                    Date date = new Date();
+                    String strDate = date.toString();//返回日期的格式化字符串
+                    LogUtils.loge("time  "+date.getTime()+"    "+date.toLocaleString()+"    "+strDate.substring(strDate.length()-4));
+
+                    //如果压缩后的文件名已经存在是不会进行替换的（需要在压缩工具类的ImageUtil.generateFilePath中设置生成文件的命名方式才可以）
                     File compressedImage = new Compressor.Builder(PicCompressionActivity.this)
                             .setMaxWidth(640)
                             .setMaxHeight(480)
-                            .setQuality(75)
+                            .setQuality(60)
                             .setCompressFormat(Bitmap.CompressFormat.JPEG)
                             .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
                                     Environment.DIRECTORY_PICTURES).getAbsolutePath())
