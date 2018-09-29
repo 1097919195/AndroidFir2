@@ -42,6 +42,7 @@ public class WebResultActivity extends Activity{
                 webView.getSettings().setJavaScriptEnabled(true);
                 webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
                 webView.getSettings().setSupportMultipleWindows(true);
+                webView.getSettings().setDomStorageEnabled(true);
 //                webView.setWebViewClient(new WebViewClient());//防止有的网页重定向跳转到浏览器(重定向就是，在网页上设置一个约束条件，条件满足，就自动转入到其它网页、网址)
 //                webView.setWebChromeClient(new WebChromeClient());
                 initProgress();
