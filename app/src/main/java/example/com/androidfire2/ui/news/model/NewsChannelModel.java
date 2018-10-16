@@ -50,7 +50,7 @@ public class NewsChannelModel implements NewsChannelContract.Model{
                     newsChannelTableList = new ArrayList<>();
                     for (int i = 0; i < channelName.size(); i++) {
                         NewsChannelTable entity = new NewsChannelTable(channelName.get(i), channelId.get(i)
-                                , ApiConstants.getType(channelId.get(i)), i <= 5, i, false);
+                                , ApiConstants.getType(channelId.get(i)), i <= 5, i, false);//不支持拖拽
                         newsChannelTableList.add(entity);
                     }
                 }

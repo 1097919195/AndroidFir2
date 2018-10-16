@@ -40,6 +40,7 @@ public interface NewsChannelContract {
 
         public abstract void onItemSwap(ArrayList<NewsChannelTable> newsChannelTableList, int fromPosition, final int toPosition);
 
+        //适配器设置点击事件监听，persenter中Rxbus监听处理returnMineNewsChannels
         public abstract void onItemAddOrRemove(ArrayList<NewsChannelTable> mineChannelTableList, ArrayList<NewsChannelTable> moreChannelTableList);
 
     }

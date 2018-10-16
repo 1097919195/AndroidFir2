@@ -11,7 +11,7 @@ public class NewsChannelTable implements Serializable {
     private String newsChannelType;
     private boolean newsChannelSelect;
     private int newsChannelIndex;
-    private Boolean newsChannelFixed;
+    private Boolean newsChannelFixed;//是否支持拖拽（更多频道的是不能拖拽的）
 
     public NewsChannelTable() {
     }
