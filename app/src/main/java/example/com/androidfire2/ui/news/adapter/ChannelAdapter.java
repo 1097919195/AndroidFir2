@@ -83,7 +83,7 @@ public class ChannelAdapter  extends CommonRecycleViewAdapter<NewsChannelTable> 
         if (isChannelFixed(fromPosition, toPosition)) {
             return false;
         }
-        Collections.swap(getAll(), fromPosition, toPosition);
+        Collections.swap(getAll(), fromPosition, toPosition);//用于交换在指定列表中的指定位置的元素
         notifyItemMoved(fromPosition, toPosition);
         RxBus.getInstance().post(AppConstant.CHANNEL_SWAP,new ChannelItemMoveEvent(fromPosition, toPosition));
         return true;

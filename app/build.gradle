@@ -32,6 +32,14 @@ android {
 //    }
 }
 
+allprojects {
+    repositories {//为当前项目提供所需依赖包
+        maven {
+            url "https://jitpack.io"//可用JitPack获取github上开源项目的jar/arr包,在JitPack上输入Github地址，能生成对应的依赖,直接复制代码，在自己工程使用就ok了
+        }
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

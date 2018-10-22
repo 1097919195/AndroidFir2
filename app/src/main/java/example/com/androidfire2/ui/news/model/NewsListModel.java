@@ -30,9 +30,9 @@ public class NewsListModel implements NewsListContract.Model {
                     public Observable<NewsSummary> call(Map<String, List<NewsSummary>> map) {
                         if (id.endsWith(ApiConstants.HOUSE_ID)) {
                             // 房产实际上针对地区的 它的id与返回key不同
-                            return Observable.from(map.get("北京"));
+                            return Observable.from(map.get("北京"));//form依次发送 map.get("北京")
                         }
-                        return Observable.from(map.get(id));
+                        return Observable.from(map.get(id));//form依次发送 map.get(id)
                     }
                 })
                 //转化时间(.map()事件 对象的直接变换。所谓变换，就是将事件序列中的对象或整个序列进行加工处理，转换成不同的事件或事件序列。)（一对一）

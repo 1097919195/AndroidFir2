@@ -40,17 +40,24 @@ public class ItemDragHelperCallback extends ItemTouchHelper.Callback {
         mOnItemMoveListener = onItemMoveListener;
     }
 
-    //是否长按启用拖拽功能,默认是false
+    /**
+     * 是否开启item长按拖拽功能 默认返回是false，重写返回true。
+     */
     @Override
     public boolean isLongPressDragEnabled() {
         return mIsLongPressEnabled;
     }
 
-    //决定拖拽/滑动的方向
+    /**
+     * 获取动作标识(可以滑动的方向)
+     * 动作标识分：dragFlags和swipeFlags
+     * dragFlags：列表滚动方向的动作标识（如竖直列表就是上和下，水平列表就是左和右）
+     * wipeFlags：与列表滚动方向垂直的动作标识（如竖直列表就是左和右，水平列表就是上和下）
+     */
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        int dragFlags = setDragFlags(recyclerView);
-        int swipeFlags = 0;
+        int dragFlags = setDragFlags(recyclerView);//拖拽
+        int swipeFlags = 0;//滑动
         return makeMovementFlags(dragFlags, swipeFlags);
     }
 
@@ -65,7 +72,7 @@ public class ItemDragHelperCallback extends ItemTouchHelper.Callback {
         return dragFlags;
     }
 
-    //和位置交换有关,可用于实现drag功能
+    //当用户拖动一个Item进行上下移动从旧的位置到新的位置的时候会调用该方法
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
         return !isDifferentItemViewType(viewHolder, target) &&
