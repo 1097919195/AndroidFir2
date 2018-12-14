@@ -372,7 +372,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         int height = cropHeight * cameraHeight / containerHeight;
 
         /** 生成最终的截取的矩形 */
-        mCropRect = new Rect(x, y, width + x, height + y);
+//        mCropRect = new Rect(x, y, width + x, height + y);
+        mCropRect = new Rect(0, 0, containerWidth, containerHeight);//支持全屏扫描识别二维码
     }
 
     /**
